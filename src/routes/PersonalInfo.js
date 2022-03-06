@@ -1,9 +1,8 @@
-import Input from "../components/Input";
+import TextInput from "../components/TextInput";
 import { useState } from "react";
 
-
 const PersonalInfo = () => {
-    const [state, setState] = useState({
+    const [user, setUser] = useState({
         firstName: "",
         lastName: "",
         email: "",
@@ -11,33 +10,56 @@ const PersonalInfo = () => {
     })
 
     const onInputChange = event => {
-        const name = event.target.name
-        const value = event.target.value
+        const {name, value} = event.target
 
-        setState(prevState => {
-            return {...prevState,
-                    [name] : value}
+        setUser(prevUser => {
+            return {...prevUser,
+                    [name]: value}
         })
     }
+
     return (
         <div className="container">
-            <div className="left-panel">            
-                <p className="title title-left">Hey, Rocketeer, what are your coordinates?</p>
-                <div className="input-box">
-                    <Input placeholder={"First Name"} name={"firstName"} state={state.firstName} change={onInputChange}/>
-                    <Input placeholder={"Last Name"} name={"lastName"} state={state.lastName} change={onInputChange}/>
-                    <Input placeholder={"E-mail"} name={"email"} state={state.email} change={onInputChange}/>
-                    <Input placeholder={"+995 5"} name={"phone"} state={state.phone} change={onInputChange}/>
-                </div>
-                    <p className="pageBar">A pageBar is going to be right here</p>
+            <div className="panel-left">            
+                <h1 className="title-left">Hey, Rocketeer, what are your coordinates?</h1>
+                    <div className="input-box">
+                        <TextInput 
+                            type="text"
+                            name="firstName"
+                            placeholder="First Name" 
+                            state={user.firstName} // i should change state to value
+                            change={onInputChange} 
+                        />
+                        <TextInput 
+                            type="text"
+                            name="lastName"
+                            placeholder="Last Name"
+                            state={user.lastName} 
+                            change={onInputChange} 
+                        />
+                        <TextInput 
+                            type="text"
+                            name="email"
+                            placeholder="E-mail"
+                            state={user.email} 
+                            change={onInputChange} 
+                        />
+                        <TextInput 
+                            type="text"
+                            name="phone"
+                            placeholder="+995 5"
+                            state={user.phone} 
+                            change={onInputChange}
+                        />
+                    </div>
+                <p className="pageBar">A pageBar is going to be right here</p>
             </div>
-            <div className="right-panel">
-                <p className="title title-right">Redberry Origins</p>
-                <p className="paragraph">You watch “What? Where? When?” Yeah. Our founders used to play it. That’s where they got a question about a famous American author and screenwriter Ray Bradbury. Albeit, our CEO Gaga Darsalia forgot the exact name and he answered Ray Redberry. And at that moment, a name for a yet to be born company was inspired - Redberry 😇</p>
+            <div className="panel-right">
+                <h1 className="title-right">Redberry Origins</h1>
+                <p className="p-main">You watch “What? Where? When?” Yeah. Our founders used to play it. That&#39;s where they got a question about a famous American author and screenwriter Ray Bradbury. Albeit, our CEO Gaga Darsalia forgot the exact name and he answered Ray Redberry. And at that moment, a name for a yet to be born company was inspired - Redberry 😇</p>
             </div>
         </div>
     )
 }
-
 
 export default PersonalInfo;
