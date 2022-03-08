@@ -5,6 +5,7 @@ const Textarea = ({value, placeholder, onChange, name}) => {
             placeholder={placeholder}
             onChange={onChange}
             name={name}
+            required
         />
     )
 }

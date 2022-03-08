@@ -1,34 +1,20 @@
-import { useState } from "react"
+import DateInput from "../components/DateInput"
 import RadioInput from "../components/RadioInput"
 
-const Covid = () => {
-
-    const [radio, setRadio] = useState({
-        workPlace: "",
-        hadCovid: "",
-        isVaccinated: ""
-    })
-
-    const handleChange = event => {
-        const {name, value} = event.target
-        
-        setRadio(prevRadio => {
-            return {...prevRadio,
-                [name]: value}
-                })
-            }
+const Covid = ({radio, handleChange}) => {
 
     return (
     <div className="container">
         <div className="panel-left">
             <h1 className="title-left">Covid Stuff</h1>
-            <fieldset className="radio-box">
+            <form>
+            <div className="radio-box">
                 <legend className="question">how would you prefer to work?</legend>
                     <RadioInput 
                             className="answer"
                             type="radio" 
                             id="office" 
-                            name="workPlace" 
+                            name="work_preference" 
                             value="office"
                             onChange={handleChange}
                     />
@@ -38,7 +24,7 @@ const Covid = () => {
                             className="answer"
                             type="radio" 
                             id="home" 
-                            name="workPlace" 
+                            name="work_preference" 
                             value="home"
                             onChange={handleChange}
                     />
@@ -48,20 +34,20 @@ const Covid = () => {
                             className="answer"
                             type="radio" 
                             id="hybrid" 
-                            name="workPlace" 
+                            name="work_preference" 
                             value="hybrid"
                             onChange={handleChange}
                     />
                     <label htmlFor="hybrid">Hybrid</label>
                     <br />
-            </fieldset>
-            <fieldset className="radio-box">
+            </div>
+            <div className="radio-box">
                 <legend className="question">Did you contact covid 19? :(</legend>
                     <RadioInput
                             className="answer"
                             type="radio" 
                             id="yes-had-covid" 
-                            name="hadCovid" 
+                            name="had_covid" 
                             value={true}
                             onChange={handleChange}
                     />
@@ -71,20 +57,21 @@ const Covid = () => {
                             className="answer"
                             type="radio" 
                             id="no-had-covid" 
-                            name="hadCovid" 
+                            name="had_covid" 
                             value={false}
                             onChange={handleChange}
                     />
                     <label htmlFor="no-had-covid">No</label>
                     <br />
-            </fieldset>
-            <fieldset className="radio-box">
+                    {radio.had_covid && (<DateInput text="When?" name="had_covid_at" value={radio.had_covid_at} onChange={handleChange}/>)}
+            </div>
+            <div className="radio-box">
                 <legend className="question">Have you been vaccinated?</legend>
                     <RadioInput
                             className="answer"
                             type="radio" 
                             id="yes-is-vaccinated" 
-                            name="isVaccinated" 
+                            name="vaccinated" 
                             value={true}
                             onChange={handleChange}
                     />
@@ -94,13 +81,15 @@ const Covid = () => {
                             className="answer"
                             type="radio" 
                             id="no-is-vaccinated" 
-                            name="isVaccinated" 
+                            name="vaccinated" 
                             value={false}
                             onChange={handleChange}
                     />
                     <label htmlFor="no-is-vaccinated">No</label>
                     <br />
-            </fieldset>
+                    {radio.vaccinated && (<DateInput text="When did you get your last covid vaccine?" name="vaccinated_at" value={radio.vaccinated_at} onChange={handleChange}/>)}
+            </div>
+            </form>
             <p className="pageBar">A pageBar is going to be right here</p>
         </div>
         <div className="panel-right">

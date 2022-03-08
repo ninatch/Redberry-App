@@ -2,24 +2,7 @@ import { useState } from "react"
 import RadioInput from "../components/RadioInput"
 import Textarea from "../components/Textarea"
 
-const Insights = () => {
-
-    const [insight, setInsight] = useState({
-        attend: "",
-        speak: "",
-        special: ""
-    })
-
-    const handleChange = event => {
-        const {name, value} = event.target
-
-        setInsight(prevInsight => {
-            return {
-                ...prevInsight,
-                [name]: value
-            }
-        })
-    }
+const Insights = ({insight, handleChange}) => {
 
     return (
         <div className="container">
@@ -32,40 +15,41 @@ const Insights = () => {
                             className="answer"
                             type="radio" 
                             id="yes-attend" 
-                            name="attend" 
+                            name="will_organize_devtalk" 
                             value={true}
                             onChange={handleChange}
                     />
                     <label htmlFor="yes-attend">Yes</label>
-                    <br />
+                    <br />                    
                     <RadioInput
                             className="answer"
                             type="radio" 
                             id="no-attend" 
-                            name="attend" 
+                            name="will_organize_devtalk" 
                             value={false}
                             onChange={handleChange}
                     />
                     <label htmlFor="no-attend">No</label>
                     <br />
                 </fieldset>
-
+                {insight.will_organize_devtalk && (
+                <>
                 <label htmlFor="speak" className="question">What would you speak about at Devtalk?</label>
                 <Textarea
-                    value={insight.speak}
+                    value={insight.devtalk_topic}
                     placeholder="I would..."
                     onChange={handleChange}
-                    name="speak"
+                    name="devtalk_topic"
                     id="speak"
                 />
+                </>)}
                 <br />
-                
                 <label htmlFor="special" className="question">Tell us something special</label>
                 <Textarea
-                    value={insight.special}
+                    value={insight.something_special}
                     placeholder="I..."
                     onChange={handleChange}
-                    name="special"
+                    name="something_special"
                     id="special"
                 />
                 <p className="pageBar">A pageBar is going to be right here</p>

@@ -248,3 +248,30 @@ label {
     font-size: 96px;
     line-height: 119px;
 }
+
+.skills {
+    margin: 2em 0;
+    width: 447px;
+    height: 48px;
+    display: flex;
+    border: 1px solid #525557;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.p-skills {
+    font-family: Montserrat;
+    font-style: italic;
+    font-size: 14px;
+    line-height: 17px;
+    color: #000;;
+}
+
+.btn-remove {
+    width:20px;
+    height:20px;
+    margin-left: 5em;
+    background: url("../images/Remove.png");
+    cursor: pointer;
+}

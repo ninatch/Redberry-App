@@ -6,6 +6,7 @@ const TextInput = ({type, name, placeholder, state, change}) => {
             placeholder={placeholder} 
             value={state} 
             onChange={change}
+            required
             />
     )
 }

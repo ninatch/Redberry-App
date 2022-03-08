@@ -1,34 +1,59 @@
 import { useState } from "react"
 import Dropdown from "../components/Dropdown"
-import Input from "../components/TextInput"
+import TextInput from "../components/TextInput"
+import SkillComponent from "../components/SkillComponent"
 
 
-const TechnicalSkillSet = () => {
+const TechnicalSkillSet = ({addSkills, deleteSkills, skills}) => {
+    const [info, setInfo] = useState([])
+
+    const getData = () => {
+    fetch("https://bootcamp-2022.devtest.ge/api/skills")
+        .then(response => response.json())
+        .then(data => setInfo(data))
+    }
+
+
     const [skill, setSkill] = useState({
         id: "",
         experience: ""
     })
-
+    
     const handleChange = event => {
         const {name, value} = event.target
-
+        const valueInNumber = parseInt(value)
         setSkill(prevSkill => {
             return {
                 ...prevSkill,
-                [name]: value
+                [name]: valueInNumber
             }
         })
     }
+    
+    const onSubmit = event => {
+        event.preventDefault()
+        addSkills(skill)
+    }
 
+    const userSkills = skills.map(s => {
+        const skillTitle = info.find(first => first.id == s.id)
+        return (
+            <SkillComponent key={s.id} title={skillTitle.title} experience={s.experience} deleteSkills={deleteSkills} 
+            id={s.id}/>
+        )
+    })
+
+    console.log(skills)
     return (
         <div className="container">
             <div className="panel-left">
                 <h1 className="title-left">Tell us about your skills</h1>
-                    <div className="experience-form">
-                        <Dropdown onChange={handleChange}/>
-                        <Input placeholder="Experience Duration in Years" />
-                        <button type="button" className="btn btn-small">Add Programming Language</button>
-                    </div>
+                    <form className="experience-form" onSubmit={onSubmit}>
+                        <Dropdown info={info} getData={getData} handleChange={handleChange} skills={skills}/>
+                        <TextInput name="experience" type="number" change={handleChange} placeholder="Experience Duration in Years" />
+                        <input type="submit" className="btn btn-small" value="Add Programming Language" />
+                    </form>
+                        {userSkills}
                 <p className="pageBar">A pageBar is going to be right here</p>
             </div>
             <div className="panel-right">

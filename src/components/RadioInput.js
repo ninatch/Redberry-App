@@ -1,4 +1,4 @@
-const RadioInput = ({type, id, name, value, checked, onChange}) => {
+const RadioInput = ({type, id, name, value, onChange}) => {
     return (
         <input
             type={type} 

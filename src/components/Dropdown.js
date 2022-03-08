@@ -1,27 +1,17 @@
-import { useState } from "react"
+const Dropdown = ({info, getData, handleChange, skills}) => {
 
-const Dropdown = ({onChange}) => {
-
-    const [info, setInfo] = useState([])
-
-    const getData = () => {
-        fetch("https://bootcamp-2022.devtest.ge/api/skills")
-            .then(response => response.json())
-            .then(data => setInfo(data))
-    }
-    
     const displayOptions = info.map(item => {
-        return <option 
-                    value={item.title} 
-                    key={item.id} 
-                    onClick={onChange}
+        return <option
+                    value={item.id} 
+                    key={item.id}
+                    disabled={skills.map(skill => skill.id).includes(item.id)}
                 >
                     {item.title}
                 </option>
     })
 
     return (
-        <select className="text-input" onClick={getData}>
+        <select className="text-input" name="id" onClick={getData} onChange={handleChange}>
             <option value="selected" hidden>Skills</option>
             {displayOptions}
         </select>

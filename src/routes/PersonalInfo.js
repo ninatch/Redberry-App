@@ -1,23 +1,7 @@
 import TextInput from "../components/TextInput";
-import { useState } from "react";
 
-const PersonalInfo = () => {
-    const [user, setUser] = useState({
-        firstName: "",
-        lastName: "",
-        email: "",
-        phone: ""
-    })
-
-    const onInputChange = event => {
-        const {name, value} = event.target
-
-        setUser(prevUser => {
-            return {...prevUser,
-                    [name]: value}
-        })
-    }
-
+const PersonalInfo = ({user, handleChange}) => {
+    console.log(user)
     return (
         <div className="container">
             <div className="panel-left">            
@@ -25,31 +9,31 @@ const PersonalInfo = () => {
                     <div className="input-box">
                         <TextInput 
                             type="text"
-                            name="firstName"
+                            name="first_name"
                             placeholder="First Name" 
-                            state={user.firstName} // i should change state to value
-                            change={onInputChange} 
+                            state={user.first_name} // i should change state to value
+                            change={handleChange} 
                         />
                         <TextInput 
                             type="text"
-                            name="lastName"
+                            name="last_name"
                             placeholder="Last Name"
-                            state={user.lastName} 
-                            change={onInputChange} 
+                            state={user.last_name} 
+                            change={handleChange} 
                         />
                         <TextInput 
                             type="text"
                             name="email"
                             placeholder="E-mail"
                             state={user.email} 
-                            change={onInputChange} 
+                            change={handleChange} 
                         />
                         <TextInput 
                             type="text"
                             name="phone"
                             placeholder="+995 5"
                             state={user.phone} 
-                            change={onInputChange}
+                            change={handleChange}
                         />
                     </div>
                 <p className="pageBar">A pageBar is going to be right here</p>
