@@ -131,7 +131,7 @@ console.log(insight)
       <TechnicalSkillSet addSkills={addSkills} deleteSkills={deleteSkills} skills={skills}/>
       <Covid radio={radio} handleChange={handleRadioChange}/>
       <Insights insight={insight} handleChange={handleInsightChange}/>
-      <Submit user={user} addSkills={addSkills} radio={radio} insight={insight}/>
+      <Submit user={user} skills={skills} radio={radio} insight={insight}/>
       <Thanks />
     </div>
   )
