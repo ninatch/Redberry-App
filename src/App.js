@@ -7,7 +7,10 @@ import TechnicalSkillSet from "./routes/TechnicalSkillSet"
 import Thanks from "./routes/Thanks"
 import "./styles/styles.css"
 
+import { Routes, Route, Link } from "react-router-dom";
+
 import { useState } from "react";
+import SubmittedApplications from "./routes/SubmittedApplications"
 
 function App() {
 
@@ -20,20 +23,21 @@ function App() {
 
 const handleUserChange = event => {
     const {name, value} = event.target
-
     setUser(prevUser => {
         return {...prevUser,
                 [name]: value}
     })
 }
 
-
-
-
-
-
 //page2
 /////////////////////////////////
+
+const [info, setInfo] = useState([])
+    const getData = () => {
+    fetch("https://bootcamp-2022.devtest.ge/api/skills")
+        .then(response => response.json())
+        .then(data => setInfo(data))
+    }
 const [skills, setSkills] = useState([])
 
     const addSkills = skill => {
@@ -41,15 +45,9 @@ const [skills, setSkills] = useState([])
         setSkills(prevSkills => [...prevSkills, skill])
       }
     }
-    console.log(skills)
-
     const deleteSkills = id => {
       setSkills(prevState => prevState.filter(s => s.id != id))
     }
-
-
-
-
 
 //page3
 ///////////////////////////////////////////
@@ -63,7 +61,6 @@ const [skills, setSkills] = useState([])
 
     const handleRadioChange = event => {
         const {name, value} = event.target
-        console.log("n" + name, "v" + value)
         let booleanValue = value
         if(value === "true" || value === "false"){
             value === "true" ? booleanValue = true : booleanValue = false
@@ -87,8 +84,6 @@ const [skills, setSkills] = useState([])
                 }
             }
 
-            console.log(radio)
-
 
 
 //page 4
@@ -101,7 +96,6 @@ const [insight, setInsight] = useState({
 
 const handleInsightChange = event => {
   const {name, value} = event.target
-  console.log("n" + name, "v" + value)
   let booleanValue = value
   if(value === "true" || value === "false"){
       value === "true" ? booleanValue = true : booleanValue = false
@@ -120,20 +114,56 @@ const handleInsightChange = event => {
           })
       }
 }
-console.log(insight)
-
 
 
   return (
-    <div>
-      <LandingPage />
-      <PersonalInfo user={user} handleChange={handleUserChange}/>
-      <TechnicalSkillSet addSkills={addSkills} deleteSkills={deleteSkills} skills={skills}/>
-      <Covid radio={radio} handleChange={handleRadioChange}/>
-      <Insights insight={insight} handleChange={handleInsightChange}/>
-      <Submit user={user} skills={skills} radio={radio} insight={insight}/>
-      <Thanks />
-    </div>
+    <>
+    <Routes>
+      <Route path="/" element={
+        <LandingPage 
+            Link = {Link}
+              />} />
+      <Route path="/info" element={
+        <PersonalInfo 
+              user={user} 
+              handleChange={handleUserChange}
+              />}/>
+      <Route path="/skills" element={
+        <TechnicalSkillSet 
+              addSkills={addSkills} 
+              deleteSkills={deleteSkills} 
+              skills={skills}
+              info={info}
+              getData={getData}
+              user={user}
+              />} />
+      <Route path="/covid" element={
+        <Covid 
+              radio={radio} 
+              handleChange={handleRadioChange}
+              skills={skills.length}
+              />} />
+      <Route path="/insights" element={
+        <Insights 
+              insight={insight} 
+              handleChange={handleInsightChange}
+              radio={radio}
+              />} />
+      <Route path="/submit" element={
+        <Submit 
+              user={user} 
+              skills={skills} 
+              radio={radio} 
+              insight={insight}
+              />} />
+      <Route path="/thanks" element={
+        <Thanks 
+              /> } />
+      <Route path="/applications" element={
+        <SubmittedApplications
+              /> } />
+    </Routes>
+    </>
   )
 }
 

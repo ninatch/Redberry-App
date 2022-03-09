@@ -1,9 +1,9 @@
-const LandingPage = () => {
+const LandingPage = ({Link}) => {
     return (
         <div className="landing-container">
             <h1 className="title-big">Welcome Rocketeer !</h1>
-            <button type="button" className="btn">Start Questionnaire</button>
-            <a href="#" className="applications">Submitted Applications</a>
+            <Link to="/info" type="button" className="btn">Start Questionnaire</Link>
+            <Link to="/applications" className="applications">Submitted Applications</Link>
             <img src={require("../images/rocketman.png")}></img>
         </div>
     )

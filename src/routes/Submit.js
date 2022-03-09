@@ -1,46 +1,44 @@
 import { useState } from "react"
+import { Navigate, NavLink, useNavigate } from "react-router-dom"
 
 const Submit = ({user, skills, radio, insight}) => {
+    const checkFormValidation = prop => {
+        if(prop.will_organize_devtalk === "") return false
+        if(prop.will_organize_devtalk === true && prop.devtalk_topic==="") return false
+        if(prop.something_special === "") return false
+        return true
+    }
+    console.log(user, skills, radio, insight, " ITEMS");
 
-    const [final, setFinal] = useState({
-            token: "354317b7-2c0c-45e0-afa0-4945740a617d",
-            first_name: "",
-            last_name: "",
-            email: "",
-            phone: "",
-            skills: [],
-            work_preference: "",
-            had_covid: "",
-            had_covid_at: "",
-            vaccinated: "",
-            vaccinated_at: "",
-            will_organize_devtalk: "",
-            devtalk_topic: "",
-            something_special: ""
-    })
+    const navigate = useNavigate();
+
+    const data = {token:"6c00963e-d8c6-4975-9c7f-c5ccce7b4872", ...user, skills, ...radio, ...insight}
+   
+    const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+    };
 
     const submitData = () => {
-        fetch("https://bootcamp-2022.devtest.ge/api/application", {method:"POST", body:JSON.stringify(final)})
-            .then(response => console.log("post request was sent: ", response))
-        }
+        fetch("https://bootcamp-2022.devtest.ge/api/application", requestOptions)
+        .then(response => console.log(response))
+}
 
     const onSubmit = event => {
         event.preventDefault()
-        setFinal(prevFinal => ({...prevFinal, ...user, skills, ...radio, ...insight}))
-        setTimeout(() => {
-            }, 1000)
-        submitData()
+            submitData()
+            navigate("/thanks")
     }
 
     
-        console.log(final)
 
-    return (
+    return checkFormValidation(insight) ? (
         <div className="submit-container">
-            <input type="submit" className="btn btn-last" value="Submit" onClick={onSubmit}></input>
-            <a href="#" className="applications link-last">go back</a>
+            <NavLink to="/thanks"><button className="btn btn-last" onClick={onSubmit}>Submit</button></NavLink>
+            <NavLink to="/insights" className="applications link-last">go back</NavLink>
         </div>
-    )
+    ) : <Navigate to="/insights"/>
 }
 
 export default Submit

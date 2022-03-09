@@ -1,9 +1,11 @@
 import DateInput from "../components/DateInput"
 import RadioInput from "../components/RadioInput"
+import { Navigate } from "react-router-dom"
+import Navigation from "../components/Navigation";
 
-const Covid = ({radio, handleChange}) => {
-
-    return (
+const Covid = ({radio, handleChange, skills}) => {
+        
+    return skills >= 1 ? (
     <div className="container">
         <div className="panel-left">
             <h1 className="title-left">Covid Stuff</h1>
@@ -15,7 +17,7 @@ const Covid = ({radio, handleChange}) => {
                             type="radio" 
                             id="office" 
                             name="work_preference" 
-                            value="office"
+                            value="from_office"
                             onChange={handleChange}
                     />
                     <label htmlFor="office">From Sairme Office</label>
@@ -25,7 +27,7 @@ const Covid = ({radio, handleChange}) => {
                             type="radio" 
                             id="home" 
                             name="work_preference" 
-                            value="home"
+                            value="from_home"
                             onChange={handleChange}
                     />
                     <label htmlFor="home">From Home</label>
@@ -35,7 +37,7 @@ const Covid = ({radio, handleChange}) => {
                             type="radio" 
                             id="hybrid" 
                             name="work_preference" 
-                            value="hybrid"
+                            value="hybrid "
                             onChange={handleChange}
                     />
                     <label htmlFor="hybrid">Hybrid</label>
@@ -96,7 +98,8 @@ const Covid = ({radio, handleChange}) => {
             <h1 className="title-right">Redberry Covid Policies</h1>
             <p className="p-main">As this infamous pandemic took over the world, we adjusted our working practices so that our employees can be as safe and comfortable as possible. We have a hybrid work environment, so you can either work from home or visit our lovely office on Sairme Street. If it was up to us, we would love you to see us in the office because we think face-to-face communications &gt; Zoom meetings. Both on the fun and productivity scales.</p>
         </div>
-    </div>)
+        <Navigation prev="/skills" next="/insights"/>
+    </div>) : <Navigate to="/skills"/>
 }
 
 export default Covid
