@@ -6,13 +6,13 @@ const PersonalInfo = ({user, handleChange}) => {
     return (
         <div className="container">
             <div className="panel-left">            
-                <h1 className="title-left">Hey, Rocketeer, what are your coordinates?</h1>
+                <h1 className="title title-left">Hey, Rocketeer, what are your coordinates?</h1>
                     <div className="input-box">
                         <TextInput 
                             type="text"
                             name="first_name"
                             placeholder="First Name" 
-                            state={user.first_name} // i should change state to value
+                            state={user.first_name}
                             change={handleChange} 
                         />
                         <TextInput 
@@ -37,11 +37,10 @@ const PersonalInfo = ({user, handleChange}) => {
                             change={handleChange}
                         />
                     </div>
-                <p className="pageBar">A pageBar is going to be right here</p>
             </div>
             <div className="panel-right">
-                <h1 className="title-right">Redberry Origins</h1>
-                <p className="p-main">You watch “What? Where? When?” Yeah. Our founders used to play it. That&#39;s where they got a question about a famous American author and screenwriter Ray Bradbury. Albeit, our CEO Gaga Darsalia forgot the exact name and he answered Ray Redberry. And at that moment, a name for a yet to be born company was inspired - Redberry 😇</p>
+                <h1 className="title title-right">Redberry Origins</h1>
+                <p className="text-main">You watch “What? Where? When?” Yeah. Our founders used to play it. That&#39;s where they got a question about a famous American author and screenwriter Ray Bradbury. Albeit, our CEO Gaga Darsalia forgot the exact name and he answered Ray Redberry. And at that moment, a name for a yet to be born company was inspired - Redberry 😇</p>
             </div>
             <Navigation prev="/" next="/skills"/>
         </div>

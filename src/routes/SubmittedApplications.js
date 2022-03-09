@@ -34,7 +34,7 @@ const SubmittedApplications =({dataSkills})=>{
                         will_organize_devtalk={app.will_organize_devtalk}
                         devtalk_topic={app.devtalk_topic}
                         something_special={app.something_special}
-                        applications={applications.indexOf(app)}
+                        applications={applications.indexOf(app) +1}
                         data={data}
                     />
                 )

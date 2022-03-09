@@ -11,7 +11,7 @@ const Dropdown = ({info, getData, handleChange, skills}) => {
     })
 
     return (
-        <select className="text-input" name="id" onClick={getData} onChange={handleChange}>
+        <select className="input" name="id" onClick={getData} onChange={handleChange}>
             <option value="selected" hidden>Skills</option>
             {displayOptions}
         </select>

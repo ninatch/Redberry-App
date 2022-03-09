@@ -34,9 +34,9 @@ const Submit = ({user, skills, radio, insight}) => {
     
 
     return checkFormValidation(insight) ? (
-        <div className="submit-container">
-            <NavLink to="/thanks"><button className="btn btn-last" onClick={onSubmit}>Submit</button></NavLink>
-            <NavLink to="/insights" className="applications link-last">go back</NavLink>
+        <div className="container submit-container">
+            <NavLink to="/thanks"><button className="btn-main btn-submit" onClick={onSubmit}>Submit</button></NavLink>
+            <NavLink to="/insights" className="tag tag-back">go back</NavLink>
         </div>
     ) : <Navigate to="/insights"/>
 }

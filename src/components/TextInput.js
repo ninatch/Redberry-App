@@ -1,6 +1,7 @@
 const TextInput = ({type, name, placeholder, state, change}) => {
     return (
-        <input className="text-input"
+        <input 
+            className="input"
             type={type} 
             name={name}
             placeholder={placeholder} 

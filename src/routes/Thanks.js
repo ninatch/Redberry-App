@@ -9,8 +9,8 @@ const Thanks = () => {
     }
     return (
         <>
-        <div className="submit-container">
-            <h1 className="title-thanks">Thanks for Joining 😊</h1>
+        <div className="container submit-container">
+            <h1 className="title title-thanks">Thanks for Joining 😊</h1>
             
         </div>
         {redirect()}
